@@ -1,0 +1,6 @@
+[submodule "lib/fred.rs"]
+	path = lib/fred.rs
+	url = git@github.com:wacfork/fred.rs.git
+[submodule "lib/neon"]
+	path = lib/neon
+	url = git@github.com:wacfork/neon.git

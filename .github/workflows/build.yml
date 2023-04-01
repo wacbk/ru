@@ -1,0 +1,56 @@
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'ru_npm/package.json'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ru_npm/package.json'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: dtolnay/rust-toolchain@nightly
+      - if: matrix.os == 'macos-latest'
+        run: |
+          brew install coreutils
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: build
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          ./sh/build.publish.sh
+        shell: bash
+        env: 
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      - name: publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          ./ru_npm/dist.sh
+        env: 
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

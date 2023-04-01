@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@w5/camel": "^0.0.1",
+    "@w5/coffee_plus": "^0.0.12",
+    "@w5/jsext": "^0.0.1",
+    "@w5/loader": "^0.0.3",
+    "@w5/read": "^0.0.1",
+    "@w5/uridir": "^0.0.1",
+    "@w5/write": "^0.0.1",
+    "cargo-cp-artifact": "^0.1.8",
+    "coffeescript": "^2.7.0",
+    "concurrently": "^7.6.0",
+    "zx": "^7.2.1"
+  },
+  "dependencies": {
+    "@w5/extract": "^0.0.1",
+    "@w5/render": "^0.0.3",
+    "@w5/verincr": "^0.0.1"
+  }
+}
