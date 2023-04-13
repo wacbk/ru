@@ -10,7 +10,7 @@
     "@w5/write": "^0.0.1",
     "cargo-cp-artifact": "^0.1.8",
     "coffeescript": "^2.7.0",
-    "concurrently": "^7.6.0",
+    "concurrently": "^8.0.1",
     "zx": "^7.2.1"
   },
   "dependencies": {
