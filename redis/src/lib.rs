@@ -4,7 +4,6 @@ use fred::{
     ClientLike, FunctionInterface, HashesInterface, KeysInterface, SetsInterface,
     SortedSetsInterface,
   },
-  pool::RedisPool,
   prelude::{ReconnectPolicy, RedisClient, RedisConfig, ServerConfig as Config},
   types::{Expiration, RedisMap, Server, SetOptions, ZRange, ZRangeBound, ZRangeKind},
 };
