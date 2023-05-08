@@ -1,12 +1,6 @@
 [workspace]
 exclude = ['lib']
-members = [
-  "nlib",
-  "ru",
-  "redis",
-  "svg2webp",
-  "misc"
-]
+members = ["nlib", "ru", "redis", "misc"]
 
 [profile.release]
 lto = true
