@@ -1,17 +1,18 @@
 mod init;
 use fred::{
   interfaces::{
-    FunctionInterface, HashesInterface, KeysInterface, SetsInterface, SortedSetsInterface,
+    ClientLike, FunctionInterface, HashesInterface, KeysInterface, SetsInterface,
+    SortedSetsInterface,
   },
   pool::RedisPool,
-  prelude::{ReconnectPolicy, RedisConfig, ServerConfig as Config},
+  prelude::{ReconnectPolicy, RedisClient, RedisConfig, ServerConfig as Config},
   types::{Expiration, RedisMap, Server, SetOptions, ZRange, ZRangeBound, ZRangeKind},
 };
 pub use init::init;
 use nlib::*;
 
 alias!(ServerConfig, Config);
-alias!(Redis, RedisPool);
+alias!(Redis, RedisClient);
 as_value_cls!(ServerConfig, Redis);
 
 fn min_max_score(cx: &'_ mut Cx) -> Result<(ZRange, ZRange), Throw> {
@@ -121,8 +122,12 @@ js_fn! {
       r#await(
           cx,
           async move {
-              //let client = RedisClient::new(conf);
-              let client = RedisPool::new(conf, None, Some(policy), 3)?;
+              let client = RedisClient::new(
+                  conf,
+                  None,
+                  Some(policy)
+              );
+              //let client = RedisPool::new(conf, None, Some(policy), 3)?;
               client.connect();
               client.wait_for_connect().await?;
               Ok(client)
@@ -203,7 +208,8 @@ def_fn! {
   redis_quit |cx| {
       this!(cx this {
           async move {
-              this.quit_pool().await;
+              this.quit().await?;
+              //this.quit_pool().await;
               Ok::<_,anyhow::Error>(())
           }
       })
