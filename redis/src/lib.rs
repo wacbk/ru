@@ -107,7 +107,7 @@ js_fn! {
   }
 
   redis_new |cx| {
-      let mut conf = RedisConfig { version: fred::types::RespVersion::RESP2, ..Default::default() };
+      let mut conf = RedisConfig { version: fred::types::RespVersion::RESP3, ..Default::default() };
       let server = (*cx.argument::<JsBox<ServerConfig>>(0)?).clone();
       conf.server = server;
       let database = as_f64(cx, 1)? as u8;

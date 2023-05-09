@@ -8,7 +8,7 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-misc = { path = "../misc" }
+# misc = { path = "../misc" }
 redis = { path = "../redis" }
 
 [features]

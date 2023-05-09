@@ -1,7 +1,7 @@
 use neon::prelude::*;
 
 pub fn init(cx: &mut ModuleContext) -> NeonResult<()> {
-  cx.export_function("zipU64", crate::zip_u64)?;
+    cx.export_function("zipU64", crate::zip_u64)?;
   cx.export_function("unzipU64", crate::unzip_u64)?;
   cx.export_function("unb64", crate::unb64)?;
   cx.export_function("b64", crate::b64)?;
@@ -20,12 +20,12 @@ pub fn init(cx: &mut ModuleContext) -> NeonResult<()> {
   cx.export_function("xxh3B36", crate::xxh3_b36)?;
   cx.export_function("ipBin", crate::ip_bin)?;
   cx.export_function("tld", crate::tld)?;
-  Ok(())
+    Ok(())
 }
 
 #[cfg(feature = "main")]
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
-  crate::init(&mut cx)?;
-  Ok(())
+    crate::init(&mut cx)?;
+    Ok(())
 }

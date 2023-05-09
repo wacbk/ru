@@ -1,35 +1,39 @@
 #!/usr/bin/env coffee
 
-> ./lib.node
+> ./lib.js
 
 
 {
-  REDIS_HOST
-  REDIS_DB
+  REDIS_HOST_PORT
   REDIS_USER
   REDIS_PORT
   REDIS_PASSWORD
 } = process.env
 
+[REDIS_HOST, REDIS_PORT] = REDIS_HOST_PORT.split(':')
+
 {
   serverHostPort
   Redis
 } = lib
-
 server = serverHostPort REDIS_HOST, parseInt(REDIS_PORT)
+
 redis = await Redis(
   server
-  parseInt REDIS_DB
-  REDIS_USER
+  0 # parseInt REDIS_DB
+  'default' # REDIS_USER
   REDIS_PASSWORD
 )
+#
+# key = "testz"
+#
+# await redis.hset key,"a","b"
+# await redis.hset key,"c","d"
+# console.log await redis.hmget key,"a","b","c"
+# await redis.del key
 
-key = "testz"
 
-await redis.hset key,"a","b"
-await redis.hset key,"c","d"
-console.log await redis.hmget key,"a","b","c"
-await redis.del key
+
 
 #console.log await redis.testz key
 #console.log await redis.zrevrangebyscore key

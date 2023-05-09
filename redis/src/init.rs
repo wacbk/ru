@@ -1,7 +1,7 @@
 use neon::prelude::*;
 
 pub fn init(cx: &mut ModuleContext) -> NeonResult<()> {
-  cx.export_function("serverHostPort", crate::server_host_port)?;
+    cx.export_function("serverHostPort", crate::server_host_port)?;
   cx.export_function("serverCluster", crate::server_cluster)?;
   cx.export_function("redisNew", crate::redis_new)?;
   cx.export_function("redisQuit", crate::redis_quit)?;
@@ -27,15 +27,9 @@ pub fn init(cx: &mut ModuleContext) -> NeonResult<()> {
   cx.export_function("redisZincrby", crate::redis_zincrby)?;
   cx.export_function("redisZincr", crate::redis_zincr)?;
   cx.export_function("redisZrangebyscore", crate::redis_zrangebyscore)?;
-  cx.export_function(
-    "redisZrangebyscoreWithscores",
-    crate::redis_zrangebyscore_withscores,
-  )?;
+  cx.export_function("redisZrangebyscoreWithscores", crate::redis_zrangebyscore_withscores)?;
   cx.export_function("redisZrevrangebyscore", crate::redis_zrevrangebyscore)?;
-  cx.export_function(
-    "redisZrevrangebyscoreWithscores",
-    crate::redis_zrevrangebyscore_withscores,
-  )?;
+  cx.export_function("redisZrevrangebyscoreWithscores", crate::redis_zrevrangebyscore_withscores)?;
   cx.export_function("redisZrem", crate::redis_zrem)?;
   cx.export_function("redisZadd", crate::redis_zadd)?;
   cx.export_function("redisZaddXx", crate::redis_zadd_xx)?;
@@ -51,12 +45,12 @@ pub fn init(cx: &mut ModuleContext) -> NeonResult<()> {
   cx.export_function("redisFstrR", crate::redis_fstr_r)?;
   cx.export_function("redisGet", crate::redis_get)?;
   cx.export_function("redisFnload", crate::redis_fnload)?;
-  Ok(())
+    Ok(())
 }
 
 #[cfg(feature = "main")]
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
-  crate::init(&mut cx)?;
-  Ok(())
+    crate::init(&mut cx)?;
+    Ok(())
 }
